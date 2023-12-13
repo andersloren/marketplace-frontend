@@ -26,24 +26,6 @@ const Trader = () => {
       });
   };
 
-  const getTraderAdsClickHandler = async () => {
-    console.log('start');
-    await axios
-      .get(baseURL + "/ads/trader/", {
-        email: "anders@loren.com"
-      })
-      .then((response) => {
-        console.log("RESPONSE:", response);
-        if (response.status === 200) {
-          console.log("DATA", response.data);
-          setAds(response.data);
-        }
-      })
-      .catch((error) => {
-        console.log("ERROR:", error);
-      });
-  };
-
   const getTraderClickHandler = async () => {
     await axios
       .get(baseURL + "/trader/")
@@ -52,6 +34,21 @@ const Trader = () => {
         if (response.status === 200) {
           console.log("DATA", response.data);
           setTrader(response.data);
+        }
+      })
+      .catch((error) => {
+        console.log("ERROR:", error);
+      });
+  };
+
+  const getTraderAdsClickHandler = async () => {
+    await axios
+      .get(baseURL + "/ads/trader/")
+      .then((response) => {
+        console.log("RESPONSE:", response);
+        if (response.status === 200) {
+          console.log("DATA", response.data);
+          setAds(response.data);
         }
       })
       .catch((error) => {
@@ -87,20 +84,20 @@ const Trader = () => {
           <div className="card-body">
             <h2 className="card-title">{ad.title}</h2>
             <h5 className="card-title">{ad.description}</h5>
-            {/* <button
+            <button
               className="btn btn-info"
               onClick={() => navigate("/details/" + ad.id)}
             >
               Details
-            </button> */}
+            </button>
             <div className="card-title">Seller: {ad.seller}</div>
             <div className="card-title">Contact: {ad.contact}</div>
           </div>
-          {/* <div className="d-grid card-footer">
+          <div className="d-grid card-footer">
             <button type="button" className="btn btn-success">
               Buy
             </button>
-          </div> */}
+          </div>
         </div>
       ))}
     </div>

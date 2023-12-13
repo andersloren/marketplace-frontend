@@ -9,7 +9,7 @@ const Ads = () => {
 
   const navigate = useNavigate();
 
-  const getAllAdsClickHandler = async () => {
+  const getAdsClickHandler = async () => {
     console.log("start");
 
     await axios
@@ -29,7 +29,7 @@ const Ads = () => {
   };
 
   const createAdsClickHandler = async () => {
-    await axios
+    axios
       .post(baseURL + "/ads/", {
         title: "This is a title",
         description: "This is a description",
@@ -39,7 +39,7 @@ const Ads = () => {
         console.log("RESPONSE:", response);
         if (response.status === 201) {
           console.log("Creating ad is Done!");
-          getAllAdsClickHandler();
+          getAdsClickHandler();
         }
       })
       .catch((error) => {
@@ -54,7 +54,7 @@ const Ads = () => {
           <button
             className="btn btn-info"
             type="button"
-            onClick={getAllAdsClickHandler}
+            onClick={getAdsClickHandler}
           >
             Get All Ads
           </button>
